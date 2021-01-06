@@ -1,0 +1,7 @@
+<!--pages/app/about.wxml-->
+<custom-bar isBack="true">
+	<text slot="backText">下单须知</text>
+</custom-bar>
+<!-- <view class="font-md text-center mg-md">瓷城生活服务平台</view> -->
+<view class="pd-md">{{info}}</view>
+

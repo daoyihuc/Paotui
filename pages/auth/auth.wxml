@@ -1,0 +1,28 @@
+<custom-bar isBack="true">
+	<text slot="backText">授权</text>
+</custom-bar>
+<view class="meu-section header meu-flex col justify-center align-center mg-b-lg">
+	<view class="meu-avatar lg round mg-b-sm" />
+	<view class="font-lg">微信授权</view>
+</view>
+
+<view class="font-md meu-space">登录后该应用将获的以下权限</view>
+<view class="font-sm mg-l-md">获得你的公开信息（{{$.user.userInfo&&!$.user.userInfo.mobile ? "手机号码" : "昵称、头像等"}}）</view>
+<button
+ wx:if="{{!$.user.userInfo}}"
+ open-type="getUserInfo"
+ bindgetuserinfo="getUserInfo"
+ class="meu-btn block main-bg mg-md round meu-fixed__bottom"
+ style="width:auto"
+>微信授权
+</button>
+
+<button
+ wx:if="{{$.user.userInfo&&!$.user.userInfo.mobile}}"
+ open-type="getPhoneNumber"
+ bindgetphonenumber="getPhoneNumber"
+ class="meu-btn block main-bg mg-md round meu-fixed__bottom"
+ style="width:auto"
+>手机号授权
+</button>
+

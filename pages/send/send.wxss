@@ -1,0 +1,11 @@
+/* pages/send/send.wxss */
+textarea{
+    height: 100rpx;
+}
+.order_tv{
+    width: 168px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}

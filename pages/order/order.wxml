@@ -1,0 +1,68 @@
+<wxs src="../../utils/wxs.wxs" module="wxs" />
+
+<custom-bar isBack="true">
+	<text slot="backText">我的订单</text>
+</custom-bar>
+<van-tabs active="{{ active }}" bind:change="onChange">
+	<van-tab title="待取货" />
+	<van-tab title="已取货" />
+	<van-tab title="已完成" />
+	<van-tab title="已退款" />
+</van-tabs>
+
+<block wx:for="{{list}}" wx:key="{{item}}">
+	<view class="meu-section card shadow">
+		<view class="meu-space meu-flex justify-bt solid-bottom">
+			<view class="font-sm">订单编号:{{wxs.substr(item.order_id,10)}}</view>
+			<view class="font-sm">{{wxs.parseTime(item.addtime)}}</view>
+		</view>
+		<view class="meu-space meu-flex align-center">
+			<image src="/static/images/order/thing.png" class="icon mg-r-sm" />
+			<text class="text-gray ">物品信息</text>
+			<view class="shu" />
+			<text>{{item.title}}</text>
+		</view>
+		<view class="meu-space meu-flex align-center">
+			<image src="/static/images/order/qu.png" class="icon mg-r-sm" />
+			<text class="main-color">取</text>
+			<view class="shu" />
+			<text class="mg-r-sm">{{item.take.province}} {{item.take.city}} {{item.take.area}} {{item.take.detailed}}</text>
+		</view>
+		<view class="meu-space meu-flex align-center solid-bottom">
+			<image src="/static/images/order/shou.png" class="icon mg-r-sm" />
+			<text class="main-color">送</text>
+			<view class="shu" />
+			<text class="mg-r-sm">{{item.give.province}} {{item.give.city}} {{item.give.area}} {{item.give.detailed}}</text>
+		</view>
+		<view class="meu-space solid-bottom meu-flex">
+			<text>备注：</text>
+			<textarea class="meu-flex__item" disabled value="{{item.remarks}}" />
+			</view>
+		<view class="meu-space meu-flex align-center solid-bottom">
+			<image src="/static/images/order/people.png" class="icon mg-r-sm" />
+			<text class="main-color">配送员</text>
+			<text class="mg-x-sm">{{item.distribution ? item.distribution.real_name : ""}}</text>
+			<text>{{item.distribution ? item.distribution.mobile : "暂无分配"}}</text>
+		</view>
+		<view class="meu-space meu-flex align-center justify-bt">
+			<view class="">
+				<text >跑腿费</text>
+				<text class="main-color">{{item.money}}元</text>
+				<view class="font-xs">下单10分钟后不可取消</view>
+			</view>
+			<view wx:if="{{ active == 0 || active == 1}}">
+				<text class="main-color mg-r-sm">{{ active == 0 ? "取货中" : "配送中"}}</text>
+				<view wx:if="{{cancen_show==0}}" class="meu-btn line-blue round" bind:tap="cancel" data-index="{{item}}">取消订单</view>
+				<view wx:if="{{cancen_show==1}}" class="meu-btn line-blue round">退款成功</view>
+			</view>
+			<view wx:if="{{ active == 2}}">
+				<text class="main-color">订单已完成</text>
+			</view>
+				<view wx:if="{{ active == 3}}">
+				<text class="main-color">订单已退款</text>
+			</view>
+		</view>
+	</view>
+</block>
+<meu-empty wx:if="{{list.length == 0}}" />
+

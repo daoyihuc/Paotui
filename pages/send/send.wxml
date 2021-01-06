@@ -1,0 +1,69 @@
+<wxs src="../../utils/wxs.wxs" module="wxs" />
+
+<custom-bar isBack="true">
+	<text slot="backText">配送订单</text>
+</custom-bar>
+<van-tabs active="{{ active }}" bind:change="onChange">
+	<van-tab title="待取货" />
+	<van-tab title="已取货" />
+	<van-tab title="已完成" />
+</van-tabs>
+
+<block wx:for="{{list}}" wx:key="{{item}}">
+	<view class="meu-section card shadow">
+		<view class="meu-space meu-flex justify-bt solid-bottom">
+		<!-- 订单编号:{{wxs.substr(item.order_id,10)}} -->
+			<view class="font-sm order_tv">订单编号:{{item.order_id}}</view>
+			<view class="font-sm">{{wxs.parseTime(item.addtime)}}</view>
+		</view>
+		<view class="meu-space meu-flex align-center">
+			<image src="/static/images/order/thing.png" class="icon mg-r-sm" />
+			<text class="text-gray ">物品信息</text>
+			<view class="shu" />
+			<text>{{item.title}}</text>
+		</view>
+		<view class="meu-space meu-flex align-center">
+			<image src="/static/images/order/qu.png" class="icon mg-r-sm" />
+			<text class="main-color">取</text>
+			<view class="shu" />
+			<view>
+				<text class="mg-r-sm" selectable='true' bind:tap='copy' data-index="{{item.take.province+item.take.city+item.take.area+item.take.detailed}}">{{item.take.province}} {{item.take.city}} {{item.take.area}} {{item.take.detailed}}</text>
+				<text class="text-blue" bind:tap="$router" data-url="/pages/map/map?address={{item.take.province}}{{item.take.city}}{{item.take.area}}{{item.take.town}}{{item.take.detailed}}">查看导航</text>
+			</view>
+		</view>
+		<view class="meu-space meu-flex align-center solid-bottom">
+			<image src="/static/images/order/shou.png" class="icon mg-r-sm" />
+			<text class="main-color">送</text>
+			<view class="shu" />
+			<view>
+				<text class="mg-r-sm" selectable='true' bind:tap='copy' data-index="{{item.give.province+item.give.city+item.give.area+item.give.detailed}}">{{item.give.province}} {{item.give.city}} {{item.give.area}} {{item.give.detailed}}</text>
+				<text class="text-blue" bind:tap="$router" data-url="/pages/map/map?address={{item.give.province}}{{item.give.city}}{{item.give.area}}{{item.give.town}}{item.give.detailed}}" >查看导航</text>
+			</view>
+		</view>
+		<view class="meu-space solid-bottom meu-flex">
+			<text>备注：</text>
+			<textarea class="meu-flex__item" disabled value="{{item.remarks}}" />
+			</view>
+		<!-- <view class="meu-space meu-flex align-center solid-bottom">
+			<image src="/static/images/order/people.png" class="icon mg-r-sm" />
+			<text class="main-color">配送员</text>
+			<text class="mg-x-sm">张三</text>
+			<text>123456</text>
+		</view> -->
+		<view class="meu-space meu-flex align-center justify-bt">
+			<view class="">
+				<text >跑腿费</text>
+				<text class="main-color">{{item.money}}元</text>
+			</view>
+			<view wx:if="{{ active == 0 || active == 1}}">
+				<view class="meu-btn line main-color round" bind:tap="onCall" data-item="{{item}}">联系客户</view>
+				<view class="meu-btn main-bg round" bind:tap="onSuccess" data-item="{{item}}">{{ active == 0 ? "已取货" : "已送达"}}</view>
+			</view>
+			<view wx:if="{{ active == 2}}">
+				<view class="meu-btn line-gray round">已完成</view>
+			</view>
+		</view>
+	</view>
+</block>
+<meu-empty wx:if="{{list.length == 0}}" />
+

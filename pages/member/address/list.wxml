@@ -1,0 +1,26 @@
+<wxs src="../../../utils/wxs.wxs" module="wxs" />
+
+<custom-bar isBack="true">
+	<text slot="backText">地址管理</text>
+</custom-bar>
+<block wx:for="{{list}}" wx:key="item">
+	<view bind:tap="onSelect" data-index="{{index}}" class="meu-space meu-flex align-center bg-white">
+		<view class="meu-avatar sm round mg-r-sm">{{wxs.substr(item.name,1,"")}}</view>
+		<view class="meu-flex__item meu-flex col mg-r-sm">
+			<view class="" wx:if="{{is_show}}">
+				<text class="font-md pd-r-xs">{{item.name}}</text>
+				<text class="font-sm">{{item.phone}}</text>
+			</view>
+			<view>
+				<text class="meu-tag sm main-bg light mg-r-xs round" wx:if="{{item.isDefault==1}}">默认</text>
+				<text class="">{{item.province}} {{item.city}} {{item.area}} {{item.town}} {{item.detailed}}</text>
+			</view>
+		</view>
+		<view bind:tap="onDelete" data-id="{{item.id}}" class="solid-left pd-l-sm pd-y-xs">删除</view>
+	</view>
+</block>
+
+<meu-empty wx:if="{{list.length==0}}" tips="暂无收货地址,快去添加吧~" />
+
+<view bind:tap="$router" data-url="./edit?is_who={{scenario}}" class="meu-fixed__bottom meu-btn block main-bg round mg-md">新增地址</view>
+

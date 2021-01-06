@@ -1,0 +1,74 @@
+<custom-bar isBack="true">
+	<text slot="backText">新建地址</text>
+</custom-bar>
+<form bindsubmit="onSubmit">
+	<view class="meu-section">
+		<view class="meu-cell" wx:if="{{is_show}}">
+			<view class="meu-cell__hd">联系人</view>
+			<view class="meu-cell__bd">
+				<input value="{{address.name}}" name="name" placeholder="请输入联系人姓名" />
+			</view>
+		</view>
+		<view class="meu-cell"  wx:if="{{is_show}}">
+			<view class="meu-cell__hd">手机号</view>
+			<view class="meu-cell__bd">
+				<input value="{{address.tel}}" name="mobile" placeholder="请输入联系人手机号" />
+			</view>
+		</view>
+		<view class="meu-cell">
+			<view class="meu-cell__hd">地址</view>
+			<picker
+			 mode="multiSelector"
+			 bindchange="bindMultiPickerChange"
+			 bindcolumnchange="bindMultiPickerColumnChange"
+			 value="{{multiIndex}}"
+			 range="{{areaList}}"
+			 range-key="name"
+			>
+				<view class="meu-cell__bd meu-arrow meu-flex">
+					<van-icon name="location-o" custom-class="main-color mg-r-xs font-md" />
+					<input
+					 value="{{addressAll}}"
+					 name="address"
+					 class="text-cut wid-all"
+					 placeholder="请选择省市区乡镇地址"
+					 disabled="true"
+					/>
+				</view>
+			</picker>
+		</view>
+		<view class="meu-cell align-center">
+			<view class="meu-cell__hd">详细地址</view>
+			<view class="meu-cell__bd">
+				<textarea
+				 name="detailAddress"
+				 value="{{address.detailAddress || address.addressDetail}}"
+				 placeholder="某某快递或道路、门牌号、小区、楼栋好、单元室等"
+				 class="all-wid"
+				 style="height:80rpx;"
+				/>
+				</view>
+      </view>
+    </view>
+    
+    <view class="meu-section">
+      <!-- <view class="meu-cell">
+        <view class="meu-cell__hd">地址标签</view>
+        <view class="meu-cell__ft">
+          <view bind:tap="onTag" data-tag="1" class="meu-tag round mg-l-sm">家</view>
+          <view bind:tap="onTag" data-tag="2" class="meu-tag round mg-l-sm">公司</view>
+          <view bind:tap="onTag" data-tag="3" class="meu-tag round mg-l-sm">学校</view>
+        </view>
+      </view> -->
+      <view class="meu-cell align-center">
+        <view class="meu-cell__hd">默认地址</view>
+        <view class="meu-cell__ft">
+          <switch name="default" checked="{{address.isDefault}}" color="#F56B4B" bindchange="defalutChange"/>
+        </view>
+      </view>
+    </view>
+	
+    <button form-type="submit" class="meu-btn block round main-bg mg-md" style="width:auto">保存</button>
+    <view wx:if="{{isEdit}}" class="meu-btn block round bg-gray mg-md" bind:tap="onDelete">删除</view>
+</form>
+

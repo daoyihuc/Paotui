@@ -1,0 +1,100 @@
+<custom-bar bind:tap="$router" data-url="/pages/tabbar/member">
+  <view slot="content" class="meu-flex align-center">
+    <image class="logo" src="/static/images/home/logo.png" />
+    <text class="mg-l-sm">瓷城生活服务平台</text>
+  </view>
+</custom-bar>
+
+<view class="banner">
+  <meu-swiper imgs="{{bannerList}}" height="500rpx" radius="0rpx" />
+</view>
+
+<view class="bg-white pd-x-md pd-y-sm relative">
+  <view class="font-lg text-warning" style="color: #F46C4A!important">帮我送</view>
+  <image src="/static/images/home/line.png" class="img-line" />
+</view>
+
+<view class="mg-md">
+  <form report-submit="false" bindsubmit="onSubmit">
+    <view class="meu-cell is_show">
+      <view class="meu-cell__bd">
+        <image src="/static/images/home/thing.png" class="icon" />
+        <input placeholder="请输入物品信息" name="info" />
+      </view>
+    </view>
+    <view class="meu-cell is_show">
+      <view class="meu-cell__bd">
+        <image src="/static/images/home/number.png" class="icon" />
+        <input bindinput="inputNumber" placeholder="请输入物品件数" name="number" />
+      </view>
+    </view>
+    <view class="mg-t-xs">
+      <view class="meu-cell" bind:tap="$router" data-url="../member/address/list?status=0">
+        <view class="meu-cell__bd">
+          <image src="/static/images/home/qu1.png" class="icon" />
+          <view class="">{{$.order.takeInfo ? $.order.takeInfo.province + $.order.takeInfo.city + $.order.takeInfo.area + $.order.takeInfo.town + $.order.takeInfo.detailed: "取货地址"}}</view>
+        </view>
+        <view class="meu-arrow" />
+      </view>
+      <view class="meu-cell" bind:tap="$router" data-url="../member/address/list?status=1">
+        <view class="meu-cell__bd">
+          <image src="/static/images/home/shou1.png" class="icon" />
+          <view class="">{{$.order.receiveInfo ? $.order.receiveInfo.province + $.order.receiveInfo.city + $.order.receiveInfo.area + $.order.receiveInfo.town+ $.order.receiveInfo.detailed : "收货地址"}}</view>
+        </view>
+        <view class="meu-arrow" />
+      </view>
+      <view class="meu-cell" class="is_show">
+        <view class="meu-cell__bd">
+          <image src="/static/images/home/contacts.png" class="icon" />
+          <input placeholder="请输入联系人" name="username" />
+        </view>
+      </view>
+      <view class="meu-cell" class="is_show">
+        <view class="meu-cell__bd">
+          <image src="/static/images/home/tel.png" class="icon" />
+          <input placeholder="请输入联系电话" name="mobile" />
+        </view>
+      </view>
+    </view>
+    <view class="input_codebox" wx:for="{{testobs}}" wx:for-item="item" data-index="{{index}}">
+      <input placeholder="请填写取件码" name="text{{index}}" maxlength="9" placeholder-style="color:#C1C1C1;" 
+      class="input_code" 
+      data-index="{{index}}"
+      bindblur="add_one" 
+      value="{{item.str}}"
+      />
+      <view class="add" data-index="{{index}}" bindtap="jian" wx:if="{{!item.is_show}}" id="{{item.id}}">
+        <image src="../../static/images/home/jianhao.png" />
+        <view>
+          删除
+        </view>
+      </view>
+      <view class="add" bindtap="add_tap" wx:if="{{item.is_show}}" id="{{item.id}}">
+        <image src="../../static/images/home/tianja.png" />
+        <view>
+          添加
+        </view>
+      </view>
+    </view>
+    <view class="meu-cell">
+        <textarea placeholder-style="color:#C1C1C1;" placeholder="请填写备注给跑腿小哥哦" name="remark" maxlength="100" />
+      </view>
+
+    <view class="mg-y-md">
+      <checkbox-group name="agree" class="meu-flex align-center">
+        <checkbox value="agree" size="10" color="#F5846C" />
+        <text class="font-xs mg-l-xs">勾选表示同意</text>
+        <text class="font-xs main-color" bind:tap="$router" data-url="/pages/app/rule">《下单须知》</text>
+      </checkbox-group>
+    </view>
+
+    <view class="submit-wrapper meu-flex bg-white round">
+      <view class="text-left meu-space meu-flex__item">
+        跑腿费总计
+        <text class="main-color">{{totalPrice}}元</text>
+      </view>
+      <button class="submit-right main-bg meu-flex align-center justify-center" form-type="submit">去下单</button>
+    </view>
+  </form>
+
+</view>

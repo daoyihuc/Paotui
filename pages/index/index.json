@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "van-tabs": "@vant/weapp/tabs",
+    "van-tab": "@vant/weapp/tab",
+    "meu-swiper":"/components/meu-swiper/index"
+  }
+}

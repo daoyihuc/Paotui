@@ -1,0 +1,69 @@
+<custom-bar>
+	<text slot="content">个人中心</text>
+</custom-bar>
+<view class="header arch">
+	<view class="member-card shadow meu-space">
+		<view class="member-info meu-flex">
+			<image
+			 wx:if="{{$.user.userInfo.avatar}}"
+			 class="meu-avatar round mg-sm"
+			 src="{{$.user.userInfo.avatar}}"
+			 mode="aspectFill"
+			/>
+			<image
+			 wx:else
+			 class="meu-avatar round mg-sm"
+			 src="/static/images/home/logo.png"
+			 mode="aspectFill"
+			/>
+			<block wx:if="{{$.user.userInfo}}">
+				<view class="mg-t-lg">
+					<view class="font-lg">{{$.user.userInfo.nickname||'游客'}}</view>
+					<view class="font-sm">{{$.user.userInfo.mobile||''}}</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view bind:tap="$router" data-url="/pages/auth/auth" class="meu-btn light mg-t-xl text-gray">请登录</view>
+			</block>
+		</view>
+	</view>
+</view>
+
+<view style="margin-top:80rpx">
+	<view class="meu-cell" bindtap="$router" data-url="/pages/member/address/list?status=1">
+		<view class="meu-cell__bd">
+			<image src="/static/images/member/address.png" class="icon-address" />
+			<text>我的地址</text>
+		</view>
+		<view class="meu-cell__ft meu-arrow" />
+	</view>
+	<view class="meu-cell" bind:tap="$router" data-url="/pages/order/order">
+		<view class="meu-cell__bd">
+			<image src="/static/images/member/order.png" class="icon" />
+			<text>我的订单</text>
+		</view>
+		<view class="meu-cell__ft meu-arrow" />
+	</view>
+	<view class="meu-cell" bind:tap="changeSend">
+		<view class="meu-cell__bd">
+			<image src="/static/images/member/send.png" class="icon-send" />
+			<text>我是配送员</text>
+		</view>
+		<view class="meu-cell__ft meu-arrow" />
+	</view>
+	<view class="meu-cell" bind:tap="$router" data-url="/pages/app/about">
+		<view class="meu-cell__bd">
+			<image src="/static/images/member/about.png" class="icon" />
+			<text>关于我们</text>
+		</view>
+		<view class="meu-cell__ft meu-arrow" />
+	</view>
+	<view class="meu-cell" bind:tap="onCall">
+		<view class="meu-cell__bd">
+			<image src="/static/images/member/service.png" class="icon" />
+			<text>客服服务</text>
+		</view>
+		<view class="meu-cell__ft meu-arrow" />
+	</view>
+</view>
+

@@ -1,0 +1,58 @@
+page{
+  background: #ffffff;
+  font-size: 36rpx;
+}
+
+.header {
+  height: 200rpx;
+  position: relative;
+}
+.header.arch::after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 150%;
+  z-index: -1;
+  border-radius: 0 0 50% 50%;
+  transform: translateX(-17%);
+  background: linear-gradient(180deg, #FE805B, #FC686F) !important;
+  overflow: hidden;
+}
+
+.member-card {
+    position: absolute;
+    bottom: -50rpx;
+    left: 15px;
+    right: 15px;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.meu-cell__bd{
+  display: flex;
+  align-items: center;
+}
+
+.icon{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 15rpx;
+}
+
+.icon-address{
+  width: 30rpx;
+  height: 40rpx;
+  margin-right: 15rpx;
+}
+
+.icon-send{
+  width: 30rpx;
+  height: 26rpx;
+  margin-right: 15rpx;
+}
+
+.meu-cell{
+  padding: 30rpx 30rpx;
+}

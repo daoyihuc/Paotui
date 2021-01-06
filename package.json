@@ -1,0 +1,17 @@
+{
+  "name": "miniprogram-template",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "唯佳",
+  "license": "ISC",
+  "dependencies": {
+    "-": "0.0.1",
+    "@vant/weapp": "^1.0.0-beta.4",
+    "miniprogram-recycle-view": "^0.1.5",
+    "mockjs": "^1.1.0"
+  },
+  "description": ""
+}
